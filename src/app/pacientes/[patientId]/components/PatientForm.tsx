@@ -25,11 +25,23 @@ export default function PatientForm(props: PatientFormProps) {
         const [createOrUpdatePatientError, response] = await t(createOrUpdatePatient(data));
 
         if (createOrUpdatePatientError || !response.data?.success) {
-            toaster.create({
-                description: 'Ocorreu um erro ao salvar os dados.',
-                title: 'Erro inesperado',
-                type: 'error'
-            });
+            if (response?.validationErrors) {
+                Object.entries(response?.validationErrors).forEach(([field, fieldError]) => {
+                    if (fieldError && typeof fieldError === 'object' && '_errors' in fieldError) {
+                        form.setError(field as keyof Patient, {
+                            type: 'validate',
+                            message: fieldError._errors?.[0]
+                        });
+                    }
+                });
+            }
+            else if (createOrUpdatePatientError || !response.data?.success) {
+                toaster.create({
+                    description: 'Ocorreu um erro ao salvar os dados.',
+                    title: 'Erro inesperado',
+                    type: 'error'
+                });
+            }
         }
         else {
             redirect('/pacientes');
@@ -58,7 +70,7 @@ export default function PatientForm(props: PatientFormProps) {
                             </Field.Root>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <Field.Root invalid={!!formErrors.name} required={true}>
+                            <Field.Root invalid={!!formErrors.email} required={true}>
                                 <Field.Label>
                                     Email <Field.RequiredIndicator />
                                 </Field.Label>
