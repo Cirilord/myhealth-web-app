@@ -6,3 +6,61 @@ datasource db {
     provider = "sqlite"
     url      = env("DATABASE_URL")
 }
+
+enum EventStatus {
+    scheduled
+    completed
+    cancelled
+}
+
+enum PlanStatus {
+    active
+    replaced
+    completed
+    removed
+}
+
+enum PlanType {
+    line
+    program
+}
+
+model Event {
+    id         String      @id @default(uuid(7))
+    date       DateTime
+    type       String
+    doctorName String      @map("doctor_name")
+    status     EventStatus
+    createdAt  DateTime    @default(now()) @map("created_at")
+    updatedAt  DateTime    @default(now()) @updatedAt @map("updated_at")
+    plan       Plan        @relation(fields: [planId], references: [id])
+    planId     String      @map("plan_id")
+
+    @@map("events")
+}
+
+model Patient {
+    id        String   @id @default(uuid(7))
+    name      String
+    email     String   @unique
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+    plans     Plan[]
+
+    @@map("patients")
+}
+
+model Plan {
+    id        String     @id @default(uuid(7))
+    type      PlanType
+    status    PlanStatus @default(active)
+    startDate DateTime   @map("start_date")
+    endDate   DateTime   @map("end_date")
+    createdAt DateTime   @default(now()) @map("created_at")
+    updatedAt DateTime   @default(now()) @updatedAt @map("updated_at")
+    patient   Patient    @relation(fields: [patientId], references: [id])
+    patientId String     @map("patient_id")
+    events    Event[]
+
+    @@map("plans")
+}
