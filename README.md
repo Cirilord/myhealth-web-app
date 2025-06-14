@@ -2,11 +2,11 @@
 
 Sistema de gestão de planos de cuidados em saúde, permitindo o acompanhamento de pacientes com diferentes tipos de planos ativos, como linhas de cuidado (contínuos) e programas de saúde (pontuais).
 
-## 📋 Visão Geral
+## Visão Geral
 
 O **MyHealth** tem como objetivo oferecer uma solução para equipes de saúde gerenciarem de forma eficiente planos de cuidado e programas de saúde, garantindo controle sobre sobreposição de planos, conflitos de agenda e registro de histórico de alterações.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Framework:** [Next.js](https://nextjs.org/) (Fullstack React)
 - **Interface:** [Chakra UI](https://chakra-ui.com/)
@@ -17,7 +17,7 @@ O **MyHealth** tem como objetivo oferecer uma solução para equipes de saúde g
 - **Testes:** Jest + Testing Library (opcional)
 - **Versionamento:** Git + GitHub
 
-## 🏗️ Funcionalidades Principais
+## Funcionalidades Principais
 
 - Gestão de Pacientes (CRUD)
 - Gestão de Planos de Cuidados (CRUD + regras de negócio)
@@ -31,7 +31,11 @@ O **MyHealth** tem como objetivo oferecer uma solução para equipes de saúde g
 - Histórico de alterações e rastreabilidade
 - Notificações para responsáveis em caso de conflitos
 
-## 📦 Instalação e Execução
+## Documentação
+
+[Acesse a documentação](docs/documentacao.pdf)
+
+## Instalação e Execução
 
 ### 1. Clone o repositório
 
