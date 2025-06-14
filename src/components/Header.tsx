@@ -1,4 +1,5 @@
-import { Box, Container, Flex, Link, Text } from '@chakra-ui/react';
+import { Box, Link as ChakraLink, Container, Flex, Link, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 export type HeaderProps = object;
 
@@ -21,6 +22,11 @@ export default function Header({ }: HeaderProps) {
                             </Text>
                         </Link>
                     </Flex>
+                    <Container maxW='7xl' px={{ base: 4, sm: 6, lg: 8 }}>
+                        <ChakraLink asChild={true}>
+                            <NextLink href='/pacientes'>Pacientes</NextLink>
+                        </ChakraLink>
+                    </Container>
                 </Flex>
             </Container>
         </Box>
