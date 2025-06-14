@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyHealth
 
-## Getting Started
+Sistema de gestão de planos de cuidados em saúde, permitindo o acompanhamento de pacientes com diferentes tipos de planos ativos, como linhas de cuidado (contínuos) e programas de saúde (pontuais).
 
-First, run the development server:
+## Visão Geral
+
+O **MyHealth** tem como objetivo oferecer uma solução para equipes de saúde gerenciarem de forma eficiente planos de cuidado e programas de saúde, garantindo controle sobre sobreposição de planos, conflitos de agenda e registro de histórico de alterações.
+
+## Tecnologias Utilizadas
+
+- **Framework:** [Next.js](https://nextjs.org/) (Fullstack React)
+- **Interface:** [Chakra UI](https://chakra-ui.com/)
+- **Banco de Dados:** SQLite (desenvolvimento) e PostgreSQL (produção)
+- **ORM:** [Prisma ORM](https://www.prisma.io/)
+- **Linguagem:** TypeScript
+- **API:** REST + Server Actions (Next.js)
+- **Testes:** Jest + Testing Library (opcional)
+- **Versionamento:** Git + GitHub
+
+## Funcionalidades Principais
+
+- Gestão de Pacientes (CRUD)
+- Gestão de Planos de Cuidados (CRUD + regras de negócio)
+- Gestão de Eventos dos Planos (CRUD)
+- Validação de regras de negócio:
+  - Apenas 1 linha de cuidado ativa por paciente
+  - Até 3 programas ativos simultaneamente
+  - Substituição de linhas de cuidado
+  - Encerramento automático de programas após conclusão
+- Detecção de conflitos e sobreposição de eventos
+- Histórico de alterações e rastreabilidade
+- Notificações para responsáveis em caso de conflitos
+
+## Documentação
+
+[Acesse a documentação](docs/documentacao.pdf)
+
+## Instalação e Execução
+
+### 1. Clone o repositório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Cirilord/myhealth-web-app.git
+cd myhealth-web-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instale as dependências
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Crie o .env com sqlite
 
-## Learn More
+```bash
+DATABASE_URL="file:./dev.db"
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Inicie o banco sqlite
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx prisma db push
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Inicie o projeto
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+yarn dev
+```
