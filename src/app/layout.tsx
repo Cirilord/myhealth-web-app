@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -25,6 +26,7 @@ export default function RootLayout(props: RootLayoutProps) {
             <body className={inter.className}>
                 <Providers>
                     {children}
+                    <Toaster />
                 </Providers>
             </body>
         </html>
